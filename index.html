@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>GoDAG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="BlockDAG technology blog.">
+<meta name="keywords" content="BlockDAG,BlockChain">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GoDAG">
+<meta property="og:url" content="https://godag.github.io/index.html">
+<meta property="og:site_name" content="GoDAG">
+<meta property="og:description" content="BlockDAG technology blog.">
+<meta property="og:locale" content="English,Chinese">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GoDAG">
+<meta name="twitter:description" content="BlockDAG technology blog.">
+  
+    <link rel="alternate" href="/atom.xml" title="GoDAG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">GoDAG</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://godag.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-blue-selection" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/25/blue-selection/" class="article-date">
+  <time datetime="2018-04-25T01:59:09.000Z" itemprop="datePublished">2018-04-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/25/blue-selection/">BlockDAG Blue Selection Algorithm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>BlockDAG blue set selection algorithm is the base of the blockDAG technology. The ‘blue set’ means a k-cluster SubDAG, let’s use S denotes it, such that |anticone(B)| ∩ S &lt;= k, for all B ∈ S. We term this selection of a k-cluster a coloring of the DAG, and use the colors ‘blue’ and ‘red’ as a convention for blocks inside and outside the chosen cluster, respectively.</p>
+<p>A special subtype of BlockDAG is the ‘0-cluster’ SubDAG, that is, BlockChain! Such as Bitcoin, Etherum, and so on. ‘k=0’ is the exact root cause of BlockChains have the highly restrictive throughput, for example ‘Bitcoin’ throughput is 3-7 transactions per second (tps). BlockDAG is the BlockChain’s future!</p>
+<h1 id="How-to-build-a-test"><a href="#How-to-build-a-test" class="headerlink" title="How to build a test?"></a>How to build a test?</h1><p>For example, to run the simulation for the example Fig.3:<br><img src="/images/Fig.3.png" alt="Fig.3"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cargo <span class="built_in">test</span> test_fig3 -- --nocapture</span><br></pre></td></tr></table></figure>
+<p>To run the algorithm simulation for an example of generating 1,000 random blocks, and execute the blue selection in a real-time calculation:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cargo <span class="built_in">test</span> test_add_block -- --nocapture</span><br></pre></td></tr></table></figure>
+<p>To add your own BlockDAG example to see the blue selection behavior, it’s quite simple! For example, to test a DAG in this figure ‘Fig.4’, just add a piece of codes like this:<br><img src="/images/Fig.4.jpg" alt="Fig.4"></p>
+<figure class="highlight rust"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[test]</span></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">test_your_example</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> k: <span class="built_in">i32</span> = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> _ = env_logger::try_init();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> node = Node::init(<span class="string">"YourExampleDag"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> node_w = node.write().unwrap();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">macro_rules!</span> dag_add &#123;</span><br><span class="line">        ( block=$a:expr, references=$b:expr ) =&gt; (node_add_block($a, $b, &amp;<span class="keyword">mut</span> node_w, k, <span class="literal">true</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    dag_add!(block=<span class="string">"Genesis"</span>, references=&amp;<span class="built_in">Vec</span>::new());</span><br><span class="line"></span><br><span class="line">    dag_add!(block=<span class="string">"B"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"Genesis"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"C"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"Genesis"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"D"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"Genesis"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"E"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"Genesis"</span>]);</span><br><span class="line"></span><br><span class="line">    dag_add!(block=<span class="string">"F"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"B"</span>,<span class="string">"C"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"H"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"E"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"I"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"C"</span>,<span class="string">"D"</span>]);</span><br><span class="line"></span><br><span class="line">    dag_add!(block=<span class="string">"J"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"F"</span>,<span class="string">"D"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"K"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"J"</span>,<span class="string">"I"</span>,<span class="string">"E"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"L"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"F"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"N"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"D"</span>,<span class="string">"H"</span>]);</span><br><span class="line"></span><br><span class="line">    dag_add!(block=<span class="string">"M"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"L"</span>,<span class="string">"K"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"O"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"K"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"P"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"K"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"Q"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"N"</span>]);</span><br><span class="line"></span><br><span class="line">    dag_add!(block=<span class="string">"R"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"O"</span>,<span class="string">"P"</span>,<span class="string">"N"</span>]);</span><br><span class="line"></span><br><span class="line">    dag_add!(block=<span class="string">"S"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"Q"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"T"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"S"</span>]);</span><br><span class="line">    dag_add!(block=<span class="string">"U"</span>, references=&amp;<span class="built_in">vec!</span>[<span class="string">"T"</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, &amp;node_w);</span><br><span class="line"></span><br><span class="line">    dag_print(&amp;node_w.dag);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> blue_selection = dag_blue_print(&amp;node_w.dag);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"k=&#123;&#125;, &#123;&#125;"</span>, k, &amp;blue_selection);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">assert_eq!</span>(<span class="number">2</span> + <span class="number">2</span>, <span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>then run it by <code>cargo test test_your_example -- --nocapture</code></p>
+<p>The output will be someghing like this:</p>
+<figure class="highlight console"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">running 1 test</span><br><span class="line">node=fig4,height=7,size_of_dag=20,dag=&#123;Genesis,B,C,D,E,F,H,I,J,L,N,K,Q,M,O,P,S,R,T,U&#125;,tips=&#123;R,M,U&#125;</span><br><span class="line">dag=&#123;</span><br><span class="line"> &#123;name=Genesis,block=name=Genesis,height=0,size_of_past_set=0,size_of_past_blue=0,blue=1,prev=&#123;&#125;&#125;</span><br><span class="line"> &#123;name=B,block=name=B,height=1,size_of_past_set=1,size_of_past_blue=1,blue=1,prev=&#123;Genesis&#125;&#125;</span><br><span class="line"> &#123;name=C,block=name=C,height=1,size_of_past_set=1,size_of_past_blue=1,blue=1,prev=&#123;Genesis&#125;&#125;</span><br><span class="line"> &#123;name=D,block=name=D,height=1,size_of_past_set=1,size_of_past_blue=1,blue=1,prev=&#123;Genesis&#125;&#125;</span><br><span class="line"> &#123;name=E,block=name=E,height=1,size_of_past_set=1,size_of_past_blue=1,blue=0,prev=&#123;Genesis&#125;&#125;</span><br><span class="line"> &#123;name=F,block=name=F,height=2,size_of_past_set=3,size_of_past_blue=3,blue=1,prev=&#123;B,C&#125;&#125;</span><br><span class="line"> &#123;name=H,block=name=H,height=2,size_of_past_set=2,size_of_past_blue=1,blue=0,prev=&#123;E&#125;&#125;</span><br><span class="line"> &#123;name=I,block=name=I,height=2,size_of_past_set=3,size_of_past_blue=3,blue=1,prev=&#123;C,D&#125;&#125;</span><br><span class="line"> &#123;name=J,block=name=J,height=3,size_of_past_set=5,size_of_past_blue=5,blue=1,prev=&#123;F,D&#125;&#125;</span><br><span class="line"> &#123;name=L,block=name=L,height=3,size_of_past_set=4,size_of_past_blue=4,blue=0,prev=&#123;F&#125;&#125;</span><br><span class="line"> &#123;name=N,block=name=N,height=3,size_of_past_set=4,size_of_past_blue=2,blue=0,prev=&#123;H,D&#125;&#125;</span><br><span class="line"> &#123;name=K,block=name=K,height=4,size_of_past_set=8,size_of_past_blue=7,blue=1,prev=&#123;I,J,E&#125;&#125;</span><br><span class="line"> &#123;name=Q,block=name=Q,height=4,size_of_past_set=5,size_of_past_blue=2,blue=0,prev=&#123;N&#125;&#125;</span><br><span class="line"> &#123;name=M,block=name=M,height=5,size_of_past_set=10,size_of_past_blue=8,blue=1,prev=&#123;L,K&#125;&#125;</span><br><span class="line"> &#123;name=O,block=name=O,height=5,size_of_past_set=9,size_of_past_blue=8,blue=1,prev=&#123;K&#125;&#125;</span><br><span class="line"> &#123;name=P,block=name=P,height=5,size_of_past_set=9,size_of_past_blue=8,blue=1,prev=&#123;K&#125;&#125;</span><br><span class="line"> &#123;name=S,block=name=S,height=5,size_of_past_set=6,size_of_past_blue=2,blue=0,prev=&#123;Q&#125;&#125;</span><br><span class="line"> &#123;name=R,block=name=R,height=6,size_of_past_set=13,size_of_past_blue=10,blue=1,prev=&#123;O,N,P&#125;&#125;</span><br><span class="line"> &#123;name=T,block=name=T,height=6,size_of_past_set=7,size_of_past_blue=2,blue=0,prev=&#123;S&#125;&#125;</span><br><span class="line"> &#123;name=U,block=name=U,height=7,size_of_past_set=8,size_of_past_blue=2,blue=0,prev=&#123;T&#125;&#125;</span><br><span class="line">&#125;</span><br><span class="line">k=3, blues=&#123;Genesis,B,C,D,F,I,J,K,M,O,P,R,&#125; total=12/20</span><br><span class="line">test tests::test_your_example ... ok</span><br></pre></td></tr></table></figure>
+<h1 id="The-source-code-open"><a href="#The-source-code-open" class="headerlink" title="The source code open"></a>The source code open</h1><p>The full source code is here: <a href="https://github.com/garyyu/rust-dag" title="[github.com/garyyu/rust-dag]" target="_blank" rel="noopener">rust-dag</a>.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godag.github.io/2018/04/25/blue-selection/" data-id="cjgepwy1x0000s2osajjt5kn4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blockDAG/">blockDAG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k-cluster/">k-cluster</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blockDAG/">blockDAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k-cluster/">k-cluster</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/blockDAG/" style="font-size: 10px;">blockDAG</a> <a href="/tags/k-cluster/" style="font-size: 10px;">k-cluster</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/25/blue-selection/">BlockDAG Blue Selection Algorithm</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Gary Yu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
