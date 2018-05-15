@@ -102,24 +102,25 @@
 
 
 
-  <meta name="description" content="BlockDAG technology blog.">
-<meta name="keywords" content="BlockDAG,BlockChain">
-<meta property="og:type" content="website">
-<meta property="og:title" content="GoDAG">
-<meta property="og:url" content="https://godag.github.io/index.html">
+  <meta name="description" content="To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: https://youtu.be/57DCYtk0lWI at 32">
+<meta name="keywords" content="blockDAG,throughput">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BlockDAG Throughput">
+<meta property="og:url" content="https://godag.github.io/2018/05/12/dag-throughput/index.html">
 <meta property="og:site_name" content="GoDAG">
-<meta property="og:description" content="BlockDAG technology blog.">
+<meta property="og:description" content="To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: https://youtu.be/57DCYtk0lWI at 32">
 <meta property="og:locale" content="English,Chinese">
+<meta property="og:updated_time" content="2018-05-15T01:57:08.020Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GoDAG">
-<meta name="twitter:description" content="BlockDAG technology blog.">
+<meta name="twitter:title" content="BlockDAG Throughput">
+<meta name="twitter:description" content="To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: https://youtu.be/57DCYtk0lWI at 32">
 
 
 
 
 
 
-  <link rel="canonical" href="https://godag.github.io/"/>
+  <link rel="canonical" href="https://godag.github.io/2018/05/12/dag-throughput/"/>
 
 
 
@@ -129,7 +130,7 @@
   };
 </script>
 
-  <title>GoDAG</title>
+  <title>BlockDAG Throughput | GoDAG</title>
   
 
 
@@ -176,8 +177,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
-  page-home">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,7 +217,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
     <a href="/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
   </li>
@@ -269,9 +269,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -303,11 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/12/dag-throughput/" itemprop="url">
-                  BlockDAG Throughput
-                </a>
+          <h1 class="post-title" itemprop="name headline">BlockDAG Throughput
               
             
           </h1>
@@ -393,8 +389,7 @@
       
 
       
-        
-          <p>To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: <a href="https://youtu.be/57DCYtk0lWI" target="_blank" rel="noopener">https://youtu.be/57DCYtk0lWI</a> at 32’.<br><table class="table table-striped">
+        <p>To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: <a href="https://youtu.be/57DCYtk0lWI" target="_blank" rel="noopener">https://youtu.be/57DCYtk0lWI</a> at 32’.<br><table class="table table-striped">
 <thead>
 <tr>
 <th>type</th>
@@ -477,15 +472,120 @@
 <li>$k$: maximum allowed parallel creation of blocks</li>
 <li>$\mathbf{D}_{max}$: the time for a message to propagate to the entire network. Or ‘Network Diameter’.</li>
 <li>$λ$: block creation rate</li>
-<li>$δ$: probability of an honest block being marked red
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/12/dag-throughput/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<li>$δ$: probability of an honest block being marked red<a id="more"></a>
+For Bitcoin, here we take 1MB block size before SegWit, and suppose bitcoin average transaction size is 0.5KB according to <a href="https://charts.bitcoin.com/chart/transaction-size" target="_blank" rel="noopener">https://charts.bitcoin.com/chart/transaction-size</a></li>
+</ul>
+<p>For Ethereum, here we use a roughly block size 25KB/block (actually, ethereum don’t have fixed limitation for block size but a block gas limitation, the maximum block size could be 46KB, 25KB is the rough average of 2018 according to <a href="https://etherscan.io/chart/blocksize)" target="_blank" rel="noopener">https://etherscan.io/chart/blocksize)</a>. And we roughly suppose 15 transactions/second (Ethereum does roughly 10-30 transactions per second (TPS) according to <a href="https://etherscan.io/chart/tx" target="_blank" rel="noopener">https://etherscan.io/chart/tx</a> )</p>
+<p>About $\mathbf{D}_{max}$, according to a research paper on <a href="[https://www.tik.ee.ethz.ch/file/0bc1493ba049fe69dbafccef4220c666/presentation.pdf]">Information Propagation in the Bitcoin Network</a> by Decker and Wattenhofer. The mean time for a node to see a block is 12.6 seconds. This paper gets some of the causes of propagation speed: “For blocks, whose size is larger than 20kB, each kilobyte costs an additional 80ms delay until a majority knows about the block.”, Block Size is a dominating factor.</p>
+<p>In bitcoin, Sotoshi Nakomomo took the assumption that D (‘Network Diameter’) is much smaller than 10 minutes, and take λ as 1/600 so that $D \cdot λ &lt;&lt; 1$.</p>
+<p>There’s a very nice measurement for block propagation speed: <a href="http://bitcoinstats.com/network/propagation/" target="_blank" rel="noopener">http://bitcoinstats.com/network/propagation/</a>. Based on its daily snapshot (from 22/11/2013 to 05/04/2017), I work out the mean value and fill into the following table:</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th style="text-align:right">Year</th>
+<th style="text-align:right">Block 50%</th>
+<th style="text-align:right">Block 90%</th>
+<th style="text-align:right">Transaction 50%</th>
+<th style="text-align:right">Transaction 90%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">2013</td>
+<td style="text-align:right">4.6s</td>
+<td style="text-align:right">42.6s</td>
+<td style="text-align:right">1.4s</td>
+<td style="text-align:right">16.8s</td>
+</tr>
+<tr>
+<td style="text-align:right">2014</td>
+<td style="text-align:right">4.1s</td>
+<td style="text-align:right">23.6s</td>
+<td style="text-align:right">1.1s</td>
+<td style="text-align:right">9.1s</td>
+</tr>
+<tr>
+<td style="text-align:right">2015</td>
+<td style="text-align:right">5.6s</td>
+<td style="text-align:right">53.2s</td>
+<td style="text-align:right">0.9s</td>
+<td style="text-align:right">4.6s</td>
+</tr>
+<tr>
+<td style="text-align:right">2016</td>
+<td style="text-align:right">4.3s</td>
+<td style="text-align:right">27.8s</td>
+<td style="text-align:right">1.7s</td>
+<td style="text-align:right">8.6s</td>
+</tr>
+<tr>
+<td style="text-align:right">2017</td>
+<td style="text-align:right">2.4s</td>
+<td style="text-align:right">11.8s</td>
+<td style="text-align:right">3.4s</td>
+<td style="text-align:right">14.3s</td>
+</tr>
+</tbody>
+</table>
+
+<p>Based on above data, and since the network is evolving at a breakneck pace, what was true yesterday might not be true tomorrow. We can simply take our assumption of $D_{max}$ as 15 seconds at following research.</p>
+<p>In <a href="https://eprint.iacr.org/2018/104.pdf" title="[https://eprint.iacr.org/2018/104.pdf]" target="_blank" rel="noopener">Phantom</a> paper, k depends on the assumption of $D_{max}$ and δ, defined as follows:</p>
+<p>$$ k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)^{-1} \cdot \Bigl(\sum_{j=\hat k+1}^\infty e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}\Bigr) &lt; δ \right \rbrace$$</p>
+<p>or in another form:</p>
+<p>$$ k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \frac {e^{-2 \cdot D_{max} \cdot λ}}{\bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)} \cdot \Bigl(\sum_{j=\hat k+1}^\infty \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}\Bigr) &lt; δ \right \rbrace$$</p>
+<p>In case of an assumption of $D_{max}=15$ seconds and $δ=1.0%$, the map between $k$ and $λ$ as follows:<br><table class="table table-striped">
+<thead>
+<tr>
+<th style="text-align:right">k</th>
+<th style="text-align:right">λ</th>
+<th style="text-align:right">$D_{max}$</th>
+<th style="text-align:right">δ</th>
+<th style="text-align:right">$j_{max}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">43</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">15s</td>
+<td style="text-align:right">1.0%</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">179</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">15s</td>
+<td style="text-align:right">1.0%</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">341</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">15s</td>
+<td style="text-align:right">1.0%</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">500</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">15s</td>
+<td style="text-align:right">1.0%</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">658</td>
+<td style="text-align:right">20</td>
+<td style="text-align:right">15s</td>
+<td style="text-align:right">1.0%</td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The theory calculation result seems get a very big $k$ according to above formula. (to be continued…)</p>
+<p>I put the source into the Go Playground so as everybody reading this post can easily click to run this calculation. Please try it here: <a href="https://play.golang.org/p/enouZTsnUFC" target="_blank" rel="noopener">https://play.golang.org/p/enouZTsnUFC</a><br>In this code I hardcoded $λ=1$, you can change this line to your $λ$ value:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lambdaλ := <span class="number">1.0</span></span><br></pre></td></tr></table></figure></p>
+<p>(to be continued…)</p>
+
       
     </div>
 
@@ -503,353 +603,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://godag.github.io/2018/04/30/click-to-run-blueselection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gary Yu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="GoDAG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/30/click-to-run-blueselection/" itemprop="url">
-                  BlockDAG Blue Selection Algorithm Demo (Golang)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-04-30 12:59:23" itemprop="dateCreated datePublished" datetime="2018-04-30T12:59:23+08:00">2018-04-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-05-15 09:34:27" itemprop="dateModified" datetime="2018-05-15T09:34:27+08:00">2018-05-15</time>
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/blockDAG/" rel="tag"># blockDAG</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/30/click-to-run-blueselection/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/30/click-to-run-blueselection/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
+            <a href="/tags/throughput/" rel="tag"># throughput</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>BlockChain (for example Bitcoin, Etherum, etc.) is just a ‘k=0’ special subtype of BlockDAG, that’s why they suffer from the highly restrictive throughput. DAG is the future!</p>
-<p>Blue set selection algorithm is the base of the BlockDAG technology. Thanks Go Playground, to create a new example DAG and run it online to see the DAG blue behaviour, it’s quite easy now. For example, to test a DAG in this figure ‘Fig.4’, just add a piece of codes like this:<br><img src="/images/Fig.4.jpg" alt="Fig.4"><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/30/click-to-run-blueselection/#more" rel="contents">
-              Read more &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/30/click-to-run-blueselection/" rel="next" title="BlockDAG Blue Selection Algorithm Demo (Golang)">
+                <i class="fa fa-chevron-left"></i> BlockDAG Blue Selection Algorithm Demo (Golang)
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://godag.github.io/2018/04/25/blue-selection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gary Yu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="GoDAG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/25/blue-selection/" itemprop="url">
-                  BlockDAG Blue Selection Algorithm (Rust)
-                </a>
-              
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-04-25 09:59:09" itemprop="dateCreated datePublished" datetime="2018-04-25T09:59:09+08:00">2018-04-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-05-15 09:33:57" itemprop="dateModified" datetime="2018-05-15T09:33:57+08:00">2018-05-15</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/25/blue-selection/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/25/blue-selection/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>BlockDAG blue set selection algorithm is the base of the blockDAG technology. The ‘blue set’ means a k-cluster SubDAG, let’s use S denotes it, such that |anticone(B)| ∩ S &lt;= k, for all B ∈ S. We term this selection of a k-cluster a coloring of the DAG, and use the colors ‘blue’ and ‘red’ as a convention for blocks inside and outside the chosen cluster, respectively.</p>
-<p>A special subtype of BlockDAG is the ‘0-cluster’ SubDAG, that is, BlockChain! Such as Bitcoin, Etherum, and so on. ‘k=0’ is the exact root cause of BlockChains have the highly restrictive throughput, for example ‘Bitcoin’ throughput is 3-7 transactions per second (tps). BlockDAG is the BlockChain’s future!</p>
-<h1 id="How-to-build-a-test"><a href="#How-to-build-a-test" class="headerlink" title="How to build a test?"></a>How to build a test?</h1><p>For example, to run the simulation for the example Fig.3:<br><img src="/images/Fig.3.png" alt="Fig.3"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cargo <span class="built_in">test</span> test_fig3 -- --nocapture</span><br></pre></td></tr></table></figure>
-<p>To run the algorithm simulation for an example of generating 1,000,000 random blocks, and execute the blue selection in a real-time calculation:<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/25/blue-selection/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -859,14 +644,29 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -1110,6 +910,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
@@ -1124,6 +928,23 @@
     <script id="dsq-count-scr" src="https://godag.disqus.com/count.js" async></script>
   
 
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://godag.github.io/2018/05/12/dag-throughput/';
+        this.page.identifier = '2018/05/12/dag-throughput/';
+        this.page.title = 'BlockDAG Throughput';
+      };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://godag.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
   
 
 
@@ -1165,16 +986,6 @@
   
 
   
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
   
 
   
