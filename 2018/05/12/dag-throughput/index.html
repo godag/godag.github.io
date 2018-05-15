@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="GoDAG">
 <meta property="og:description" content="To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: https://youtu.be/57DCYtk0lWI at 32">
 <meta property="og:locale" content="English,Chinese">
-<meta property="og:updated_time" content="2018-05-15T07:45:58.547Z">
+<meta property="og:updated_time" content="2018-05-15T07:56:12.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BlockDAG Throughput">
 <meta name="twitter:description" content="To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: https://youtu.be/57DCYtk0lWI at 32">
@@ -345,7 +345,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-15 15:45:58" itemprop="dateModified" datetime="2018-05-15T15:45:58+08:00">2018-05-15</time>
+                <time title="Modified: 2018-05-15 15:56:12" itemprop="dateModified" datetime="2018-05-15T15:56:12+08:00">2018-05-15</time>
               
             
           </span>
@@ -477,7 +477,7 @@ For Bitcoin, here we take 1MB block size before SegWit, and suppose bitcoin aver
 </ul>
 <p>For Ethereum, here we use a roughly block size 25KB/block (actually, ethereum don’t have fixed limitation for block size but a block gas limitation, the maximum block size could be 46KB, 25KB is the rough average of 2018 according to <a href="https://etherscan.io/chart/blocksize)" target="_blank" rel="noopener">https://etherscan.io/chart/blocksize)</a>. And we roughly suppose 15 transactions/second (Ethereum does roughly 10-30 transactions per second (TPS) according to <a href="https://etherscan.io/chart/tx" target="_blank" rel="noopener">https://etherscan.io/chart/tx</a> )</p>
 <p>About $\mathbf{D}_{max}$, according to a research paper on <a href="[https://www.tik.ee.ethz.ch/file/0bc1493ba049fe69dbafccef4220c666/presentation.pdf]">Information Propagation in the Bitcoin Network</a> by Decker and Wattenhofer. The mean time for a node to see a block is 12.6 seconds. This paper gets some of the causes of propagation speed: “For blocks, whose size is larger than 20kB, each kilobyte costs an additional 80ms delay until a majority knows about the block.”, Block Size is a dominating factor.</p>
-<p>In bitcoin, Sotoshi Nakomomo took the assumption that D (‘Network Diameter’) is much smaller than 10 minutes, and take λ as 1/600 so that $D \cdot λ &lt;&lt; 1$.</p>
+<p>In bitcoin, Sotoshi Nakomomo took the assumption that D (‘Network Diameter’) is much smaller than 10 minutes, and take λ as 1/600 so that $D \cdot λ \ll 1$.</p>
 <p>There’s a very nice measurement for block propagation speed: <a href="http://bitcoinstats.com/network/propagation/" target="_blank" rel="noopener">http://bitcoinstats.com/network/propagation/</a>. Based on its daily snapshot (from 22/11/2013 to 05/04/2017), I work out the mean value and fill into the following table:</p>
 <table class="table table-striped">
 <thead>
@@ -537,7 +537,7 @@ For Bitcoin, here we take 1MB block size before SegWit, and suppose bitcoin aver
 <p>then, we can get the following final form of this equation:</p>
 <p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \frac {e^{-2 \cdot D_{max} \cdot λ}}{\bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)} \cdot \Bigl(  e^{2 \cdot D_{max} \cdot λ} - \sum_{j=0}^k \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}  \Bigr) &lt; δ \right \rbrace$$<br>$$\tag{1.4}$$<br>Or in another form:</p>
 <p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)^{-1} \cdot \Bigl(1 - \sum_{j=0}^k e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}\Bigr) &lt; δ \right \rbrace$$<br>$$\tag{1.5}$$</p>
-<p>If giving the assumption of $2 \cdot D_{max} \cdot λ &gt;&gt; 1$, we get:<br>$$ \bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)^{-1} \approx 1.0 \tag{1.6}$$<br>And then the equation $(1.6)$ can be furtherly simplified as:</p>
+<p>If giving the assumption of $2 \cdot D_{max} \cdot λ \gg 1$, we get:<br>$$ \bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)^{-1} \approx 1.0 \tag{1.6}$$<br>And then the equation $(1.6)$ can be furtherly simplified as:</p>
 <p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \sum_{j=0}^k e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!} &gt; (1 - δ) \right \rbrace \tag{1.7}$$</p>
 <p>In case of an assumption of $D_{max}=15$ seconds and $δ=1.0%$, the map between $k$ and $λ$ as follows:<br><table class="table table-striped">
 <thead>
