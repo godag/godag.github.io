@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="GoDAG">
 <meta property="og:description" content="To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: https://youtu.be/57DCYtk0lWI at 32">
 <meta property="og:locale" content="English,Chinese">
-<meta property="og:updated_time" content="2018-05-15T07:56:12.748Z">
+<meta property="og:updated_time" content="2018-06-01T03:08:49.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BlockDAG Throughput">
 <meta name="twitter:description" content="To compare BlockDAG throughput with blockchain, I take Bitcoin and Etherum as the references in the following table, part of dag’s data comes from this presentation: https://youtu.be/57DCYtk0lWI at 32">
@@ -345,7 +345,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-15 15:56:12" itemprop="dateModified" datetime="2018-05-15T15:56:12+08:00">2018-05-15</time>
+                <time title="Modified: 2018-06-01 11:08:49" itemprop="dateModified" datetime="2018-06-01T11:08:49+08:00">2018-06-01</time>
               
             
           </span>
@@ -416,8 +416,8 @@
 <tr>
 <td>Bitcoin</td>
 <td>0</td>
-<td style="text-align:center">15s?</td>
-<td style="text-align:right">?</td>
+<td style="text-align:center">15s</td>
+<td style="text-align:right">4.88%</td>
 <td style="text-align:right">1 Blk/600s</td>
 <td style="text-align:right">~3.33 txn/s</td>
 <td style="text-align:right">~1.667 KB/s</td>
@@ -428,8 +428,8 @@
 <tr>
 <td>Ethereum</td>
 <td>0</td>
-<td style="text-align:center">15s?</td>
-<td style="text-align:right">?</td>
+<td style="text-align:center">15s</td>
+<td style="text-align:right">86.47%</td>
 <td style="text-align:right">1 Blk/15s</td>
 <td style="text-align:right">~15 txn/s</td>
 <td style="text-align:right">~1.667 KB/s</td>
@@ -451,7 +451,7 @@
 </tr>
 <tr>
 <td>dag B</td>
-<td>?</td>
+<td>1621</td>
 <td style="text-align:center">15s</td>
 <td style="text-align:right">1.0‰</td>
 <td style="text-align:right">50 Blks/s</td>
@@ -475,14 +475,14 @@
 </tr>
 </tbody>
 </table>
-<br><strong>Note</strong>:</p>
+<br><a id="more"></a><br><strong>Note</strong>:</p>
 <ul>
 <li>$k$: maximum allowed parallel creation of blocks</li>
 <li>$\mathbf{D}_{max}$: the time for a message to propagate to the entire network. Or ‘Network Diameter’.</li>
 <li>$λ$: block creation rate</li>
-<li>$δ$: probability of an honest block being marked red<a id="more"></a>
-For Bitcoin, here we take 1MB block size before SegWit, and suppose bitcoin average transaction size is 0.5KB according to <a href="https://charts.bitcoin.com/chart/transaction-size" target="_blank" rel="noopener">https://charts.bitcoin.com/chart/transaction-size</a></li>
+<li>$δ$: probability of an honest block being marked red.</li>
 </ul>
+<p>For Bitcoin, here we take 1MB block size before SegWit, and suppose bitcoin average transaction size is 0.5KB according to <a href="https://charts.bitcoin.com/chart/transaction-size" target="_blank" rel="noopener">https://charts.bitcoin.com/chart/transaction-size</a></p>
 <p>For Ethereum, here we use a roughly block size 25KB/block (actually, ethereum don’t have fixed limitation for block size but a block gas limitation, the maximum block size could be 46KB, 25KB is the rough average of 2018 according to <a href="https://etherscan.io/chart/blocksize)" target="_blank" rel="noopener">https://etherscan.io/chart/blocksize)</a>. And we roughly suppose 15 transactions/second (Ethereum does roughly 10-30 transactions per second (TPS) according to <a href="https://etherscan.io/chart/tx" target="_blank" rel="noopener">https://etherscan.io/chart/tx</a> )</p>
 <p>About $\mathbf{D}_{max}$, according to a research paper on <a href="[https://www.tik.ee.ethz.ch/file/0bc1493ba049fe69dbafccef4220c666/presentation.pdf]">Information Propagation in the Bitcoin Network</a> by Decker and Wattenhofer. The mean time for a node to see a block is 12.6 seconds. This paper gets some of the causes of propagation speed: “For blocks, whose size is larger than 20kB, each kilobyte costs an additional 80ms delay until a majority knows about the block.”, Block Size is a dominating factor.</p>
 <p>In bitcoin, Sotoshi Nakomomo took the assumption that D (‘Network Diameter’) is much smaller than 10 minutes, and take λ as 1/600 so that $D \cdot λ \ll 1$.</p>
@@ -538,67 +538,80 @@ For Bitcoin, here we take 1MB block size before SegWit, and suppose bitcoin aver
 
 <p>Based on above data, and since the network is evolving at a breakneck pace, what was true yesterday might not be true tomorrow. We can simply take our assumption of $D_{max}$ as 15 seconds at following research.</p>
 <p>In <a href="https://eprint.iacr.org/2018/104.pdf" title="[https://eprint.iacr.org/2018/104.pdf]" target="_blank" rel="noopener">Phantom</a> paper, k depends on the assumption of $D_{max}$ and δ, defined as follows:</p>
-<p>$$ k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)^{-1} \cdot \Bigl(\sum_{j=\hat k+1}^\infty e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}\Bigr) &lt; δ \right \rbrace  \tag{1}$$</p>
-<p>or in another form:</p>
-<p>$$ k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \frac {e^{-2 \cdot D_{max} \cdot λ}}{\bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)} \cdot \Bigl(\sum_{j=\hat k+1}^\infty \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}\Bigr) &lt; δ \right \rbrace  \tag{1.1}$$</p>
-<p><strong>Lexi Antea</strong> found that above equation can be simplified by the following math truth:<br>$$ e^x = \sum_{n=0}^\infty \frac{x^n}{n!}  \tag{1.2}$$<br>So, we can get the following form to avoid the calculation of an infinite sum:<br>$$ \sum_{j=\hat k+1}^\infty \frac{(2 \cdot D_{max} \cdot λ)^j}{j!} = e^{2 \cdot D_{max} \cdot λ} - \sum_{j=0}^k \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}  \tag{1.3}$$</p>
-<p>then, we can get the following final form of this equation:</p>
-<p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \frac {e^{-2 \cdot D_{max} \cdot λ}}{\bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)} \cdot \Bigl(  e^{2 \cdot D_{max} \cdot λ} - \sum_{j=0}^k \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}  \Bigr) &lt; δ \right \rbrace$$<br>$$\tag{1.4}$$<br>Or in another form:</p>
-<p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)^{-1} \cdot \Bigl(1 - \sum_{j=0}^k e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}\Bigr) &lt; δ \right \rbrace$$<br>$$\tag{1.5}$$</p>
-<p>If giving the assumption of $2 \cdot D_{max} \cdot λ \gg 1$, we get:<br>$$ \bigl(1-e^{-2 \cdot D_{max} \cdot λ}\bigr)^{-1} \approx 1.0 \tag{1.6}$$<br>And then the equation $(1.6)$ can be furtherly simplified as:</p>
-<p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \sum_{j=0}^k e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!} &gt; (1 - δ) \right \rbrace \tag{1.7}$$</p>
-<p>In case of an assumption of $D_{max}=15$ seconds and $δ=1.0%$, the map between $k$ and $λ$ as follows:<br><table class="table table-striped">
+<p>$$ k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \sum_{j=\hat k+1}^\infty e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!} &lt; δ \right \rbrace  \tag{1}$$</p>
+<p>This equation arises from a probability of events for a Poisson distribution( <a href="https://en.wikipedia.org/wiki/Poisson_distribution" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Poisson_distribution</a> ). An event can occur 0, 1, 2, … times in an interval. The average number of events in an interval is designated  (lambda). Lambda is the event rate, also called the rate parameter. The probability of observing k events in an interval is given by the equation:</p>
+<p>$$ P(k\ events\ in\ internal) = e^{-λ} \cdot \frac{λ^k}{k!} $$<br>The equation $(1)$ is to calculate the probalility of, given that block A was created at time t, a event where more than k additional blocks have been created during [t-D,t+D].</p>
+<p>Let’s write equation $(1)$ in another form:</p>
+<p>$$ k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: e^{-2 \cdot D_{max} \cdot λ} \cdot \Bigl(\sum_{j=\hat k+1}^\infty \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}\Bigr) &lt; δ \right \rbrace  \tag{1.1}$$</p>
+<p>We first start by noticing that the above equation can be simplified by the following math truth:<br>$$ e^x = \sum_{n=0}^\infty \frac{x^n}{n!}  \tag{1.2}$$<br>So, we can get the following form to avoid the calculation of an infinite sum:<br>$$ \sum_{j=\hat k+1}^\infty \frac{(2 \cdot D_{max} \cdot λ)^j}{j!} = e^{2 \cdot D_{max} \cdot λ} - \sum_{j=0}^k \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}  \tag{1.3}$$</p>
+<p>then, we can get the following form of this equation:</p>
+<p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: e^{-2 \cdot D_{max} \cdot λ} \cdot \Bigl(  e^{2 \cdot D_{max} \cdot λ} - \sum_{j=0}^k \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}  \Bigr) &lt; δ \right \rbrace$$<br>$$\tag{1.4}$$<br>Or in another form:</p>
+<p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \Bigl(1 - \sum_{j=0}^k e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!}\Bigr) &lt; δ \right \rbrace  \tag{1.5}$$</p>
+<p>Or in another form to put 1 on the right side:</p>
+<p>$$k(D_{max},δ) := min\left \lbrace \hat k∈\mathbb N: \sum_{j=0}^k e^{-2 \cdot D_{max} \cdot λ} \cdot \frac{(2 \cdot D_{max} \cdot λ)^j}{j!} &gt; (1 - δ) \right \rbrace \tag{1.6}$$</p>
+<p>In case of an assumption of $D_{max}=15 seconds$ and $δ=1.0‰$, the map between $k$ and $λ$ as follows:<br><table class="table table-striped">
 <thead>
 <tr>
 <th style="text-align:right">k</th>
 <th style="text-align:right">λ</th>
 <th style="text-align:right">$D_{max}$</th>
 <th style="text-align:right">δ</th>
-<th style="text-align:right">$j_{max}$</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right">43</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1/600</td>
+<td style="text-align:right">15s</td>
+<td style="text-align:right">1.0‰</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td style="text-align:right">1/15</td>
+<td style="text-align:right">15s</td>
+<td style="text-align:right">1.0‰</td>
+</tr>
+<tr>
+<td style="text-align:right">48</td>
 <td style="text-align:right">1</td>
 <td style="text-align:right">15s</td>
-<td style="text-align:right">1.0%</td>
-<td style="text-align:right"></td>
+<td style="text-align:right">1.0‰</td>
 </tr>
 <tr>
-<td style="text-align:right">179</td>
+<td style="text-align:right">189</td>
 <td style="text-align:right">5</td>
 <td style="text-align:right">15s</td>
-<td style="text-align:right">1.0%</td>
-<td style="text-align:right"></td>
+<td style="text-align:right">1.0‰</td>
 </tr>
 <tr>
-<td style="text-align:right">341</td>
+<td style="text-align:right">355</td>
 <td style="text-align:right">10</td>
 <td style="text-align:right">15s</td>
-<td style="text-align:right">1.0%</td>
-<td style="text-align:right"></td>
+<td style="text-align:right">1.0‰</td>
 </tr>
 <tr>
-<td style="text-align:right">500</td>
+<td style="text-align:right">517</td>
 <td style="text-align:right">15</td>
 <td style="text-align:right">15s</td>
-<td style="text-align:right">1.0%</td>
-<td style="text-align:right"></td>
+<td style="text-align:right">1.0‰</td>
 </tr>
 <tr>
-<td style="text-align:right">658</td>
+<td style="text-align:right">677</td>
 <td style="text-align:right">20</td>
 <td style="text-align:right">15s</td>
-<td style="text-align:right">1.0%</td>
-<td style="text-align:right"></td>
+<td style="text-align:right">1.0‰</td>
+</tr>
+<tr>
+<td style="text-align:right">1621</td>
+<td style="text-align:right">50</td>
+<td style="text-align:right">15s</td>
+<td style="text-align:right">1.0‰</td>
 </tr>
 </tbody>
 </table>
 </p>
-<p>The theory calculation result seems get a very big $k$ according to above formula. (to be continued…)</p>
-<p>I put the source into the Go Playground so as everybody reading this post can easily click to run this calculation. Please try it here: <a href="https://play.golang.org/p/enouZTsnUFC" target="_blank" rel="noopener">https://play.golang.org/p/enouZTsnUFC</a><br>In this code I hardcoded $λ=1$, you can change this line to your $λ$ value:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lambdaλ := <span class="number">1.0</span></span><br></pre></td></tr></table></figure><br><strong>Note</strong>: because Go Playground limitation, when $λ$ &gt; 3, it will complain “process took too long. Program exited.” You’d better run it on your own PC.</p>
-<p>Or use the following modified <strong>Python</strong> version based on <strong>Lexi Antea</strong>‘s source phantom_k.py:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> exp, log</span><br><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line"></span><br><span class="line">Dmax = Decimal(<span class="string">'15.0'</span>) <span class="comment"># An upper bound on delay diameter, in seconds</span></span><br><span class="line">lamb = Decimal(<span class="string">'10.0'</span>)  <span class="comment"># Block creation frequency, in hertz</span></span><br><span class="line">delta = Decimal(<span class="string">'0.01'</span>)  <span class="comment"># Fraction of honest blocks marked red</span></span><br><span class="line">oneMinusDelta = Decimal(<span class="string">'1.0'</span>) - delta</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculates the factorial of integer n; returns a Decimal</span></span><br><span class="line">fac= []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> n &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> NaN</span><br><span class="line">    <span class="keyword">elif</span> len(fac)&gt;n:</span><br><span class="line">	<span class="keyword">return</span> fac[n]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        res = Decimal(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            res = res*Decimal(i)</span><br><span class="line">	fac.append(res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculates the (2*Dmax*lamb)^j</span></span><br><span class="line">powj= []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xpower</span><span class="params">(j)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> j == <span class="number">0</span>:</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> j &lt; <span class="number">0</span>:</span><br><span class="line">	<span class="keyword">return</span> NaN</span><br><span class="line">    <span class="keyword">elif</span> len(powj)&gt;j:</span><br><span class="line">	<span class="keyword">return</span> powj[j]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">    	temp = Decimal(<span class="number">2</span>)*Dmax*lamb</span><br><span class="line">	res = (temp**j)</span><br><span class="line">	powj.append(res)</span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculates the LHS of the expression</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">val</span><span class="params">(k)</span>:</span></span><br><span class="line">    temp = Decimal(<span class="number">2</span>)*Dmax*lamb</span><br><span class="line">    neg_temp = -temp</span><br><span class="line">    denom = (Decimal(<span class="number">1</span>)-neg_temp.exp())</span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(k+<span class="number">1</span>):</span><br><span class="line">        s += xpower(j)/fact(j)</span><br><span class="line"></span><br><span class="line">    s *= neg_temp.exp()</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">k = <span class="number">-1</span></span><br><span class="line">v = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> v &lt; oneMinusDelta:</span><br><span class="line">    k = k+<span class="number">1</span></span><br><span class="line">    v = val(k)</span><br><span class="line">    print(<span class="string">"k="</span>,k,<span class="string">"p="</span>,<span class="number">1</span>-v)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"final result:"</span>)</span><br><span class="line">print(<span class="string">"k="</span>,k,<span class="string">"p="</span>,<span class="number">1</span>-v)</span><br></pre></td></tr></table></figure></p>
+<p>According to above result, perhaps Bitcoin can make an evolving to BlockDAG with $k=2$, using smaller block size and decrease the block reward correspondingly，that will get up to triple Bitcoin transaction throughput; similiar case for Ethereum, evolving to BlockDAG with $k=8$ will get up to 9 times of transaction throughput, theoretically.</p>
+<p>Here is a modified <strong>Python</strong> version based on <strong>Lexi Antea</strong>‘s source phantom_k.py, you can run it to verify the calculation:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> exp, log</span><br><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line"></span><br><span class="line">Dmax = Decimal(<span class="string">'15.0'</span>) <span class="comment"># An upper bound on delay diameter, in seconds</span></span><br><span class="line">lamb = Decimal(<span class="string">'10.0'</span>)  <span class="comment"># Block creation frequency, in hertz</span></span><br><span class="line">delta = Decimal(<span class="string">'0.001'</span>)  <span class="comment"># Fraction of honest blocks marked red</span></span><br><span class="line">oneMinusDelta = Decimal(<span class="string">'1.0'</span>) - delta</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculates the factorial of integer n; returns a Decimal</span></span><br><span class="line">fac= []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> n &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> NaN</span><br><span class="line">    <span class="keyword">elif</span> len(fac)&gt;n:</span><br><span class="line">	<span class="keyword">return</span> fac[n]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        res = Decimal(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            res = res*Decimal(i)</span><br><span class="line">	fac.append(res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculates the (2*Dmax*lamb)^j</span></span><br><span class="line">powj= []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xpower</span><span class="params">(j)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> j == <span class="number">0</span>:</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> j &lt; <span class="number">0</span>:</span><br><span class="line">	<span class="keyword">return</span> NaN</span><br><span class="line">    <span class="keyword">elif</span> len(powj)&gt;j:</span><br><span class="line">	<span class="keyword">return</span> powj[j]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">    	temp = Decimal(<span class="number">2</span>)*Dmax*lamb</span><br><span class="line">	res = (temp**j)</span><br><span class="line">	powj.append(res)</span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculates the LHS of the expression</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">val</span><span class="params">(k)</span>:</span></span><br><span class="line">    temp = Decimal(<span class="number">2</span>)*Dmax*lamb</span><br><span class="line">    neg_temp = -temp</span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(k+<span class="number">1</span>):</span><br><span class="line">        s += xpower(j)/fact(j)</span><br><span class="line"></span><br><span class="line">    s *= neg_temp.exp()</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">k = <span class="number">-1</span></span><br><span class="line">v = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> v &lt; oneMinusDelta:</span><br><span class="line">    k = k+<span class="number">1</span></span><br><span class="line">    v = val(k)</span><br><span class="line">    print(<span class="string">"k="</span>,k,<span class="string">"p="</span>,<span class="number">1</span>-v)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"final result:"</span>)</span><br><span class="line">print(<span class="string">"k="</span>,k,<span class="string">"p="</span>,<span class="number">1</span>-v)</span><br></pre></td></tr></table></figure></p>
 <p>(to be continued…)</p>
 
       
